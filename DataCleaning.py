@@ -1,6 +1,6 @@
 import csv
 import os, re, time
-
+#Readline function will take in the filename and use the filename to create a new temporoary file with datetime as a postfix.
 def readLines(filename):
    
     timestr=time.strftime("%Y%m%d-%H%M%S")
@@ -12,6 +12,8 @@ def readLines(filename):
     
         cleanLines(rows,filename,fileWriter)
 
+#cleanLines function will read each row from the input file and remove any spaces of "00:00" from each cell.
+#Later ot will seperate each column with a comma seperator.
 def cleanLines(rows,filename,fileWriter):
     
     newDataRow=[]
@@ -23,7 +25,7 @@ def cleanLines(rows,filename,fileWriter):
         cleanString(newDataRow,filename,fileWriter)
         
         
-        
+ #cleanString will remove any special charrectors.      
 def cleanString (originalString,filename,fileWriter):
     cleanedString = []
 
@@ -36,9 +38,9 @@ def cleanString (originalString,filename,fileWriter):
         fixRow(cleanedString, fileWriter)
     else:
         fileWriter.write(','.join(cleanedString) + '\n')
-            
+        #join function will reattached the fields
 def fixRow(row,fileWriter):
-     
+    #fix the skewness in the data and creating a new file based on fixed position of the fields.
     promotionId= row[0]
     promotionDistrictId=row[1]
     promotionName=row[2]
